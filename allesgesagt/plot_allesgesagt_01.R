@@ -12,11 +12,14 @@ allesgesagt <- allesgesagt_raw %>%
 
 
 ggplot(allesgesagt) +
+  geom_smooth(aes(x = Date, y = Duration), se = FALSE, alpha = 0.5,
+              color = "darkblue", size = 0.5) +
   geom_col(aes(x = Date, y = Duration)) +
-  geom_smooth(aes(x = Date, y = Duration), se = FALSE, alpha = 0.5) +
-  geom_smooth(aes(x = Date, y = Duration), se = FALSE, method = "lm") +
+  geom_point(aes(x = Date, y = Duration, color = gender)) +
+  # geom_smooth(aes(x = Date, y = Duration), se = FALSE, method = "lm") +
   scale_y_continuous(expand = c(0,0), limits = c(0, 600)) +
-  theme_half_open()
+  theme_half_open() +
+  theme(legend.position = "bottom")
 
 ggplot(allesgesagt) +
   geom_boxplot(aes(x = gender, y = Duration), width = 0.5) +
