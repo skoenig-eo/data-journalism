@@ -14,10 +14,16 @@ allesgesagt <- allesgesagt_raw %>%
 ggplot(allesgesagt) +
   geom_smooth(aes(x = Date, y = Duration), se = FALSE, alpha = 0.5,
               color = "darkblue", size = 0.5) +
-  geom_col(aes(x = Date, y = Duration)) +
+  geom_col(aes(x = Date, y = Duration), color = "lightgrey") +
   geom_point(aes(x = Date, y = Duration, color = gender)) +
+  scale_color_manual(breaks = c("female", "male"),
+                     labels = c("Weiblich", "Männlich"),
+                     values = c("#e76f51", "#2a9d8f"),
+                     name = "Geschlecht") +
   # geom_smooth(aes(x = Date, y = Duration), se = FALSE, method = "lm") +
-  scale_y_continuous(expand = c(0,0), limits = c(0, 600)) +
+  scale_x_date(name = "Datum", expand = c(0.01,0)) +
+  scale_y_continuous(expand = c(0,0), limits = c(0, 600), 
+                     name = "Dauer [Minuten]") +
   theme_half_open() +
   theme(legend.position = "bottom")
 
