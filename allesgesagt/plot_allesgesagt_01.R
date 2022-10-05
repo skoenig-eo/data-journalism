@@ -25,7 +25,9 @@ ggplot(allesgesagt) +
   scale_y_continuous(expand = c(0,0), limits = c(0, 600), 
                      name = "Dauer [Minuten]") +
   theme_half_open() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") 
+ggsave("allesgesagt/duration_ts_01.png",
+       width = 15, height = 12, units = "cm", dpi = 450)
 
 ggplot(allesgesagt) +
   geom_boxplot(aes(x = gender, y = Duration), width = 0.5) +
