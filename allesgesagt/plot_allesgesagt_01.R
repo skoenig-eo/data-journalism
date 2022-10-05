@@ -14,7 +14,7 @@ allesgesagt <- allesgesagt_raw %>%
 ggplot(allesgesagt) +
   geom_smooth(aes(x = Date, y = Duration), se = FALSE, alpha = 0.5,
               color = "darkblue", size = 0.5) +
-  geom_col(aes(x = Date, y = Duration), color = "lightgrey") +
+  geom_col(aes(x = Date, y = Duration), color = "darkgrey", alpha = 0.75) +
   geom_point(aes(x = Date, y = Duration, color = gender)) +
   scale_color_manual(breaks = c("female", "male"),
                      labels = c("Weiblich", "Männlich"),
@@ -27,7 +27,7 @@ ggplot(allesgesagt) +
   theme_half_open() +
   theme(legend.position = "bottom") 
 ggsave("allesgesagt/duration_ts_01.png",
-       width = 15, height = 12, units = "cm", dpi = 450)
+       width = 18, height = 12, units = "cm", dpi = 450)
 
 ggplot(allesgesagt) +
   geom_boxplot(aes(x = gender, y = Duration), width = 0.5) +
