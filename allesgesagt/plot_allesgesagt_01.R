@@ -4,7 +4,7 @@
 # Created on: 2022-03-11
 # 
 # Last modified by: Simon König, simonkoenig@live.de
-# On: 2022-10-05
+# On: 2022-10-07
 #
 # Script Description: some nice plots of the allesgesagt data
 # 
@@ -28,7 +28,8 @@ allesgesagt_raw <- read_csv("allesgesagt/allesgesagt_raw.csv")
 # a little bit of data wrangling
 allesgesagt <- allesgesagt_raw %>% 
   mutate(Date = make_date(year, month, day),
-         Duration = hours*60+minutes)
+         Duration = hours*60+minutes,
+         Total_Duration = cumsum(Duration))
 
 
 
@@ -57,4 +58,13 @@ ggsave("allesgesagt/duration_ts_01.png",
 ggplot(allesgesagt) +
   geom_boxplot(aes(x = gender, y = Duration), width = 0.5) +
   scale_y_continuous(expand = c(0,0), limits = c(0, 600)) +
+  theme_half_open()
+
+# cumulative duration plot
+ggplot(allesgesagt) +
+  geom_line(aes(x = Date, y = Total_Duration), 
+            color = "darkgreen", alpha = 0.75, size = 1.1) +
+  scale_x_date(name = "Datum", expand = c(0,0)) +
+  scale_y_continuous(name = "Kumulative Dauer", 
+                     expand = c(0,0), limits = c(0, 20000)) +
   theme_half_open()
