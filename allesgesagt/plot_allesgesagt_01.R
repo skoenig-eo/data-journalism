@@ -4,7 +4,7 @@
 # Created on: 2022-03-11
 # 
 # Last modified by: Simon König, simonkoenig@live.de
-# On: 2022-10-07
+# On: 2022-10-27
 #
 # Script Description: some nice plots of the allesgesagt data
 # 
