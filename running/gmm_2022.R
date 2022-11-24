@@ -1,4 +1,6 @@
 library(readxl)
+library(lubridate)
+library(cowplot)
 library(tidyverse)
 
 raw_results <- read_excel("running/ErgebnislistenErgebnislisteOA.xlsx")
@@ -22,5 +24,13 @@ results <- read_excel("running/ErgebnislistenErgebnislisteOA.xlsx",
                       col_types = c("numeric", "numeric", "text",
                                     "text", "text", "numeric",
                                     "text", "numeric", "text",
-                                    "text", "text")) %>% 
-  drop_na()
+                                    "numeric", "text")) %>% 
+  drop_na() %>% 
+  rename(ID = 1, Number = 2, Name = 3, Nationality = 4, Team = 5, Birthyear = 6,
+         Group = 7, Place = 8, Gross = 9, Net = 10, Difference = 11) %>% 
+  select(Number, Nationality, Birthyear, Group, Place, Gross, Net) %>% 
+  # running times are pasted as fractions of a day for some reason
+  mutate(Net_seconds = Net*60*60*24,
+         Rounded_seconds = floor(Net_seconds),
+         Net_approx = seconds_to_period(Rounded_seconds))
+
