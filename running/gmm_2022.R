@@ -32,5 +32,11 @@ results <- read_excel("running/ErgebnislistenErgebnislisteOA.xlsx",
   # running times are pasted as fractions of a day for some reason
   mutate(Net_seconds = Net*60*60*24,
          Rounded_seconds = floor(Net_seconds),
-         Net_approx = seconds_to_period(Rounded_seconds))
+         Net_approx = seconds_to_period(Rounded_seconds),
+         Hours = hour(Net_approx),
+         Minutes = minute(Net_approx),
+         Seconds = second(Net_approx),
+         In_minutes = Hours*60+Minutes+Seconds/60)
 
+ggplot(results) +
+  geom_density(aes(x = In_minutes))
