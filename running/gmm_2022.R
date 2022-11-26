@@ -49,7 +49,6 @@ my_result <- results %>% filter(Name == "KÖNIG Simon")
 
 
 ggplot(results) +
-<<<<<<< HEAD
   geom_density(aes(x = In_minutes), color = "grey20",
                fill = "lightgrey", alpha = 0.25) +
   geom_vline(xintercept = median_time, linetype = "dashed") +
@@ -58,15 +57,6 @@ ggplot(results) +
   geom_vline(xintercept = perc_25, linetype = "dotted") +
   geom_vline(xintercept = my_result %>% pull(In_minutes),
              color = "#8E1230") +
-=======
-  geom_density(aes(x = In_minutes), fill = "lightgrey", alpha = 0.25) +
-  geom_vline(xintercept = median_time) +
-  geom_vline(xintercept = perc_01) +
-  geom_vline(xintercept = perc_10) +
-  geom_vline(xintercept = perc_25) +
-  geom_vline(xintercept = my_result %>% pull(In_minutes),
-             color = "darkred", size = 1) +
->>>>>>> 1c130928e9aed483ab0fb2cdb3f409e45f927af9
   scale_x_continuous(expand = c(0,0), name = "Running Time [minutes]") +
   scale_y_continuous(expand = c(0,0), name = "Density") +
   theme_half_open() +
