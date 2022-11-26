@@ -49,10 +49,14 @@ my_result <- results %>% filter(Name == "KÖNIG Simon")
 
 
 ggplot(results) +
-  geom_density(aes(x = In_minutes)) +
+  geom_density(aes(x = In_minutes), fill = "lightgrey", alpha = 0.25) +
   geom_vline(xintercept = median_time) +
   geom_vline(xintercept = perc_01) +
   geom_vline(xintercept = perc_10) +
   geom_vline(xintercept = perc_25) +
-  geom_vline(xintercept = my_result %>% pull(In_minutes)) +
-  theme_half_open()
+  geom_vline(xintercept = my_result %>% pull(In_minutes),
+             color = "darkred", size = 1) +
+  scale_x_continuous(expand = c(0,0), name = "Running Time [minutes]") +
+  scale_y_continuous(expand = c(0,0), name = "Density") +
+  theme_half_open() +
+  ggtitle("GMM Half Marathon Results 2022")
