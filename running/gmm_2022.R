@@ -116,3 +116,5 @@ ggplot(results) +
            label = "Finishing Time 2022",
            color = "#8E1230") +
   theme_half_open()
+ggsave("running/gmm_2023_target.png",
+       dpi = 450, width = 16, height = 12, units = "cm")
