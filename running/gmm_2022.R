@@ -94,15 +94,25 @@ ggplot(results) +
 
 # slightly changed from base plot
 ggplot(results) +
+  # finisher time distributions for 2022
   geom_density(aes(x = In_minutes), color = NA,
                fill = "lightgrey", alpha = 0.6) +
+  # median, first and 25th percentile
   geom_vline(xintercept = median_time, linetype = "dashed") +
   geom_vline(xintercept = perc_01, linetype = "dotted") +
-  geom_vline(xintercept = perc_10, color = "#C11C03", size = 1) +
   geom_vline(xintercept = perc_25, linetype = "dotted") +
+  # 10th percentile (target time for 2023), and finisher time for 2022
+  geom_vline(xintercept = perc_10, color = "#C11C03", size = 1) +
   geom_vline(xintercept = my_result %>% pull(In_minutes),
              color = "#8E1230") +
   scale_x_continuous(expand = c(0,0), name = "Running Time [minutes]") +
   scale_y_continuous(expand = c(0,0), name = "Density") +
-  theme_half_open() +
-  ggtitle("GMM Target Time for 2023")
+  # arrows and annotations
+  geom_curve(x = 170, y = 0.01, xend = 133, yend = 0.014,
+             color = "#8E1230", 
+             arrow = arrow(length = unit(0.04, "npc"), type = "closed"),
+             curvature = 0.3) +
+  annotate("text", x = 170, y = 0.0085, 
+           label = "Finishing Time 2022",
+           color = "#8E1230") +
+  theme_half_open()
