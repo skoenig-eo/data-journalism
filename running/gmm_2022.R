@@ -4,7 +4,7 @@
 # Created on: 2022-03-11
 # 
 # Last modified by: Simon König, simonkoenig@live.de
-# On: 2022-10-27
+# On: 2023-02-05
 #
 # Script Description: plot GMM 2022 finisher data for the half marathon
 # and find a suitable finishing time for 2023
@@ -108,13 +108,21 @@ ggplot(results) +
   scale_x_continuous(expand = c(0,0), name = "Running Time [minutes]") +
   scale_y_continuous(expand = c(0,0), name = "Density") +
   # arrows and annotations
-  geom_curve(x = 170, y = 0.01, xend = 133, yend = 0.014,
+  geom_curve(x = 170, y = 0.01, xend = 133, yend = 0.015,
              color = "#8E1230", 
              arrow = arrow(length = unit(0.04, "npc"), type = "closed"),
              curvature = 0.3) +
+  geom_curve(x = 75, y = 0.01, xend = 95, yend = 0.015,
+             color = "#C11C03", 
+             arrow = arrow(length = unit(0.04, "npc"), type = "closed"),
+             curvature = -0.5) +
   annotate("text", x = 170, y = 0.0085, 
            label = "Finishing Time 2022",
            color = "#8E1230") +
+  # this creates an error and has to be adjusted
+  annotate("text", x = 80, y = 0.0085, 
+           label = "bold(2023 Goal)", parse = TRUE,
+           color = "#C11C03") +
   theme_half_open()
 ggsave("running/gmm_2023_target.png",
        dpi = 450, width = 16, height = 12, units = "cm")
